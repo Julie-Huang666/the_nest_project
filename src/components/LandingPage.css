@@ -4,62 +4,6 @@
   position: relative;
 }
 
-/* Top Bar with Logo and Navbar */
-.top-bar {
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-  opacity: 0.85;
-  background: #FFFFFF;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 170px;
-  height: 65px;
-  object-fit: contain;
-}
-
-/* Navbar Styles */
-.navbar {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links {
-  display: inline-flex;
-  align-items: center;
-  gap: 50px;
-}
-
-.nav-link {
-  color: #000000;
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 121.277%; /* 24.255px */
-  text-decoration: none;
-  transition: opacity 0.3s ease;
-}
-
-.nav-link.active {
-  color: #591671;
-  font-weight: 700;
-}
-
-.nav-link:hover {
-  opacity: 0.7;
-}
 
 /* Hero Section Styles */
 .hero-section {
@@ -245,24 +189,6 @@
 }
 
 @media (max-width: 768px) {
-  .top-bar {
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px 20px;
-  }
-  
-  .logo {
-    width: 140px;
-    height: 54px;
-  }
-  
-  .nav-links {
-    gap: 20px;
-  }
-  
-  .nav-link {
-    font-size: 16px;
-  }
   
   .hero-overlay {
     width: 90%;

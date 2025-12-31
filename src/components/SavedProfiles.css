@@ -1,0 +1,178 @@
+.saved-profiles-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #F5F5F5;
+}
+
+
+/* Main Content */
+.saved-profiles-content {
+  padding: 40px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.saved-profiles-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #591671;
+  margin: 0 0 10px 0;
+}
+
+.saved-profiles-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #555555;
+  margin: 0 0 40px 0;
+}
+
+/* Empty State */
+.empty-state-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  padding: 40px 20px;
+}
+
+.empty-state-box {
+  width: 100%;
+  max-width: 800px;
+  border: 2px dashed #D0D0D0;
+  border-radius: 20px;
+  padding: 60px 40px;
+  background: #FFFFFF;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.empty-state-icon {
+  margin-bottom: 10px;
+}
+
+.empty-state-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0;
+}
+
+.empty-state-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  margin: 0;
+  max-width: 500px;
+}
+
+.go-explore-btn {
+  background: #4A4A4A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-top: 10px;
+}
+
+.go-explore-btn:hover {
+  background: #333333;
+  transform: translateY(-1px);
+}
+
+.go-explore-btn:active {
+  transform: translateY(0);
+}
+
+/* Saved Profiles Grid */
+.saved-profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Use the same card styles as StudentProfileCard */
+.saved-profiles-grid .student-card {
+  /* All styles inherited from StudentProfileCard.css */
+}
+
+/* Card styles are now handled by StudentProfileCard.css */
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .saved-profiles-content {
+    padding: 30px 40px;
+  }
+
+  .saved-profiles-heading {
+    font-size: 40px;
+  }
+
+  .saved-profiles-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .saved-profiles-content {
+    padding: 20px;
+  }
+
+  .saved-profiles-heading {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .saved-profiles-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .empty-state-box {
+    padding: 40px 20px;
+  }
+
+  .empty-state-title {
+    font-size: 24px;
+  }
+
+  .empty-state-description {
+    font-size: 14px;
+  }
+
+  .saved-profiles-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .saved-profiles-heading {
+    font-size: 28px;
+  }
+
+  .empty-state-title {
+    font-size: 20px;
+  }
+}
+
+/* Email notification styles are now handled by StudentProfileCard.css */
+

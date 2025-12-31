@@ -8,60 +8,6 @@
 }
 
 /* Top Bar Styles - Reuse from LandingPage */
-.top-bar {
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-  opacity: 0.85;
-  background: #FFFFFF;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 170px;
-  height: 65px;
-  object-fit: contain;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links {
-  display: inline-flex;
-  align-items: center;
-  gap: 50px;
-}
-
-.nav-link {
-  color: #000000;
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 121.277%;
-  text-decoration: none;
-  transition: opacity 0.3s ease;
-}
-
-.nav-link.active {
-  color: #591671;
-  font-weight: 700;
-}
-
-.nav-link:hover {
-  opacity: 0.7;
-}
 
 /* Form Container */
 .form-container {
@@ -148,11 +94,20 @@
   background: #FAFAFA;
   transition: all 0.3s ease;
   cursor: pointer;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .upload-area:hover {
   border-color: #591671;
   background: #F5F5F5;
+}
+
+.upload-area.drag-over {
+  border-color: #591671;
+  background: #F0E6F5;
 }
 
 .file-input {
@@ -189,6 +144,42 @@
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   color: #9E9E9E;
+}
+
+.photo-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.photo-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #591671;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.change-photo-btn {
+  padding: 8px 20px;
+  background: #591671;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.change-photo-btn:hover {
+  background: #7a1f9a;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
 }
 
 /* Save Button */
@@ -232,20 +223,5 @@
     font-size: 36px;
   }
 
-  .top-bar {
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px 20px;
-  }
-
-  .nav-links {
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .nav-link {
-    font-size: 16px;
-  }
 }
 

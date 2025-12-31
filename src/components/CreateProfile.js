@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 import './CreateProfile.css';
 
 const CreateProfile = () => {
@@ -16,6 +17,36 @@ const CreateProfile = () => {
     bio: '',
     profilePhoto: null
   });
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Load existing profile data when editing
+  useEffect(() => {
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      const profile = JSON.parse(savedProfile);
+      setFormData({
+        fullName: profile.name || '',
+        email: profile.email || '',
+        instagram: '', // Instagram not stored in profile
+        school: profile.school || '',
+        year: profile.year ? profile.year.toLowerCase() : '',
+        major: profile.major || '',
+        roommateStatus: profile.roommateTag === 'Searching Room mate' ? 'looking' : 'not-seeking',
+        interests: Array.isArray(profile.interests) ? profile.interests.join(', ') : (profile.interests || ''),
+        bio: profile.description || profile.bio || '',
+        profilePhoto: null // Can't restore file from localStorage
+      });
+      
+      // Set photo preview if image exists
+      if (profile.image && !profile.image.startsWith('blob:')) {
+        setPhotoPreview(profile.image);
+      } else if (profile.image && profile.image.startsWith('blob:')) {
+        // Try to restore blob URL (may not work after refresh)
+        setPhotoPreview(profile.image);
+      }
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,16 +57,90 @@ const CreateProfile = () => {
   };
 
   const handleFileChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      profilePhoto: e.target.files[0]
-    }));
+    const file = e.target.files[0];
+    if (file) {
+      setFormData(prev => ({
+        ...prev,
+        profilePhoto: file
+      }));
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+      setFormData(prev => ({
+        ...prev,
+        profilePhoto: file
+      }));
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Navigate to second profile page
-    navigate('/profile-page-2');
+    
+    // Create user profile object
+    const interestsArray = formData.interests
+      ? formData.interests.split(',').map(i => i.trim()).filter(i => i)
+      : [];
+    
+    // Preserve existing ID if editing, otherwise create new one
+    const existingProfile = localStorage.getItem('userProfile');
+    const existingId = existingProfile ? JSON.parse(existingProfile).id : null;
+    
+    // Preserve existing image if no new photo uploaded
+    const existingImage = existingProfile && !formData.profilePhoto 
+      ? JSON.parse(existingProfile).image 
+      : null;
+    
+    const userProfile = {
+      id: existingId || 'user-profile-' + Date.now(),
+      name: formData.fullName,
+      email: formData.email,
+      major: formData.major,
+      year: formData.year.charAt(0).toUpperCase() + formData.year.slice(1),
+      school: formData.school,
+      description: formData.bio,
+      interests: interestsArray,
+      image: formData.profilePhoto 
+        ? URL.createObjectURL(formData.profilePhoto)
+        : (existingImage || '/profile_pics/create_profile_page/backg.png'),
+      roommateTag: formData.roommateStatus === 'looking' ? 'Searching Room mate' : null
+    };
+
+    // Save user profile to localStorage
+    localStorage.setItem('userProfile', JSON.stringify(userProfile));
+    
+    // Navigate to saved profiles page
+    navigate('/save-profile');
   };
 
   return (
@@ -46,19 +151,7 @@ const CreateProfile = () => {
       }}
     >
       {/* Top Bar with Logo and Navbar */}
-      <div className="top-bar">
-        <div className="logo-section">
-          <img src="/Landing_page/nest-logo.png" alt="The NEST Logo" className="logo" />
-        </div>
-        <nav className="navbar">
-          <div className="nav-links">
-            <a href="/" className="nav-link">Home</a>
-            <a href="/explore" className="nav-link">Explore</a>
-            <a href="/save-profile" className="nav-link">Saved Profiles</a>
-            <a href="/my-profile" className="nav-link active">My Profile</a>
-          </div>
-        </nav>
-      </div>
+      <Navbar activePage="my-profile" />
 
       {/* Form Container */}
       <div className="form-container">
@@ -161,10 +254,8 @@ const CreateProfile = () => {
               value={formData.roommateStatus}
               onChange={handleInputChange}
             >
-              <option value="">Finding for room mates</option>
-              <option value="looking">Looking for roommates</option>
-              <option value="found">Found roommates</option>
-              <option value="not-looking">Not looking</option>
+              <option value="looking">Finding for room mates</option>
+              <option value="not-seeking">Not actively seeking</option>
             </select>
           </div>
 
@@ -194,7 +285,12 @@ const CreateProfile = () => {
 
           <div className="form-group">
             <label>Upload Profile Photo</label>
-            <div className="upload-area">
+            <div 
+              className={`upload-area ${isDragging ? 'drag-over' : ''}`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
               <input
                 type="file"
                 id="profilePhoto"
@@ -203,13 +299,22 @@ const CreateProfile = () => {
                 onChange={handleFileChange}
                 className="file-input"
               />
-              <label htmlFor="profilePhoto" className="upload-label">
-                <div className="upload-icon">📷</div>
-                <div className="upload-text">
-                  <strong>Upload a photo</strong>
-                  <span>Drag and drop files here</span>
+              {photoPreview ? (
+                <div className="photo-preview-container">
+                  <img src={photoPreview} alt="Profile preview" className="photo-preview" />
+                  <label htmlFor="profilePhoto" className="change-photo-btn">
+                    Change photo
+                  </label>
                 </div>
-              </label>
+              ) : (
+                <label htmlFor="profilePhoto" className="upload-label">
+                  <div className="upload-icon">📷</div>
+                  <div className="upload-text">
+                    <strong>Upload a photo</strong>
+                    <span>Drag and drop files here or click to browse</span>
+                  </div>
+                </label>
+              )}
             </div>
           </div>
 

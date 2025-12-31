@@ -1,0 +1,190 @@
+.explore-students-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #FFFFFF;
+}
+
+
+/* Main Content */
+.explore-content {
+  padding: 40px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.explore-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #591671;
+  margin: 0 0 30px 0;
+}
+
+/* Search and Filter Section */
+.search-filter-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.search-bar-container {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  color: #666666;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 20px 14px 48px;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  background: #FFFFFF;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #591671;
+  box-shadow: 0 0 0 3px rgba(89, 22, 113, 0.1);
+}
+
+.search-input::placeholder {
+  color: #999999;
+}
+
+.filter-dropdowns {
+  display: flex;
+  gap: 15px;
+}
+
+.filter-dropdown {
+  padding: 14px 20px;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 150px;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: #591671;
+  box-shadow: 0 0 0 3px rgba(89, 22, 113, 0.1);
+}
+
+.filter-icon-btn {
+  padding: 14px;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  background: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  color: #000000;
+}
+
+.filter-icon-btn:hover {
+  background: #F5F5F5;
+  border-color: #591671;
+  transform: scale(1.05);
+}
+
+.remove-filter-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Students Grid */
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .explore-content {
+    padding: 30px 40px;
+  }
+
+  .explore-heading {
+    font-size: 40px;
+  }
+
+  .students-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .explore-content {
+    padding: 20px;
+  }
+
+  .explore-heading {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .search-filter-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar-container {
+    min-width: 100%;
+  }
+
+  .filter-dropdowns {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filter-dropdown {
+    width: 100%;
+  }
+
+  .students-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-heading {
+    font-size: 28px;
+  }
+
+  .search-input,
+  .filter-dropdown {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+}
+
