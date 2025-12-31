@@ -1,12 +1,26 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const handleGetStarted = () => {
     navigate('/create-profile');
+  };
+
+  const handleStep1Click = () => {
+    navigate('/my-profile');
+  };
+
+  const handleStep2Click = () => {
+    navigate('/explore');
+  };
+
+  const handleStep3Click = () => {
+    navigate('/save-profile');
   };
 
   return (
@@ -18,7 +32,7 @@ const LandingPage = () => {
         </div>
         <nav className="navbar">
           <div className="nav-links">
-            <a href="/" className="nav-link">Home</a>
+            <a href="/" className={`nav-link ${isHomePage ? 'nav-link-active' : ''}`}>Home</a>
             <a href="/explore" className="nav-link">Explore</a>
             <a href="/save-profile" className="nav-link">Saved Profiles</a>
             <a href="/my-profile" className="nav-link">My Profile</a>
@@ -84,7 +98,7 @@ const LandingPage = () => {
               <div className="step-content">
                 <div className="step-header">
                   <h3 className="step-title">Create Profile</h3>
-                  <button className="step-arrow-btn">
+                  <button className="step-arrow-btn" onClick={handleStep1Click}>
                     <span className="arrow">→</span>
                   </button>
                 </div>
@@ -98,7 +112,7 @@ const LandingPage = () => {
               <div className="step-content">
                 <div className="step-header">
                   <h3 className="step-title">Explore Students</h3>
-                  <button className="step-arrow-btn">
+                  <button className="step-arrow-btn" onClick={handleStep2Click}>
                     <span className="arrow">→</span>
                   </button>
                 </div>
@@ -112,7 +126,7 @@ const LandingPage = () => {
               <div className="step-content">
                 <div className="step-header">
                   <h3 className="step-title">Make Connection</h3>
-                  <button className="step-arrow-btn">
+                  <button className="step-arrow-btn" onClick={handleStep3Click}>
                     <span className="arrow">→</span>
                   </button>
                 </div>

@@ -52,9 +52,9 @@
   transition: opacity 0.3s ease;
 }
 
-.nav-link:first-child {
-  color: #591671;
-  font-weight: 700;
+.nav-link.nav-link-active {
+  color: #591671 !important;
+  font-weight: 700 !important;
 }
 
 .nav-link:hover {
@@ -242,6 +242,35 @@
   .hero-features {
     font-size: 16px;
   }
+  
+  /* Feature Bubbles Responsive for Tablet */
+  .why-nest-section {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .feature-bubble {
+    width: 100%;
+    max-width: 511px;
+    left: 0 !important;
+    position: relative !important;
+  }
+  
+  .feature-bubble-1,
+  .feature-bubble-2,
+  .feature-bubble-3 {
+    top: auto !important;
+    left: auto !important;
+    margin-bottom: 20px;
+  }
+  
+  .why-nest-laptop-image {
+    position: relative !important;
+    left: 0 !important;
+    width: 100%;
+    max-width: 1005px;
+    margin: 46px auto 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -286,6 +315,52 @@
     width: 180px;
     height: 50px;
     font-size: 16px;
+  }
+  
+  /* Feature Bubbles Responsive - Mobile */
+  .why-nest-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .why-nest-laptop-image {
+    position: relative !important;
+    left: 0 !important;
+    width: 100%;
+    max-width: 1005px;
+    margin: 46px auto 0;
+  }
+  
+  .feature-bubble {
+    width: 250px;
+    height: auto;
+    min-height: 140px;
+    position: absolute !important;
+    left: auto !important;
+    right: 10px;
+    z-index: 10;
+    padding: 15px 20px;
+    padding-left: 50px;
+  }
+  
+  .feature-bubble-title {
+    font-size: 20px;
+  }
+  
+  .feature-bubble-text {
+    font-size: 14px;
+  }
+  
+  .feature-bubble-1 {
+    top: calc(56px + 79.8px + 16px + 39.9px + 46px + 80px) !important;
+  }
+  
+  .feature-bubble-2 {
+    top: calc(56px + 79.8px + 16px + 39.9px + 46px + 80px + 140px + 20px) !important;
+  }
+  
+  .feature-bubble-3 {
+    top: calc(56px + 79.8px + 16px + 39.9px + 46px + 80px + (140px + 20px) * 2) !important;
   }
 }
 
@@ -605,5 +680,81 @@
 
 .stat-label:last-child {
   margin-bottom: 0;
+}
+
+/* Feature Bubbles Responsive - Medium Screens */
+@media (max-width: 1400px) {
+  .why-nest-section {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+  
+  .feature-bubble {
+    left: calc(-863px + 315px) !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .why-nest-section {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  
+  .feature-bubble {
+    width: 450px;
+    left: calc(-863px + 415px) !important;
+  }
+  
+  .why-nest-laptop-image {
+    width: 90%;
+    max-width: 1005px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .why-nest-section {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .why-nest-laptop-image {
+    position: relative !important;
+    left: 0 !important;
+    width: 100%;
+    max-width: 1005px;
+    margin: 46px auto 0;
+  }
+  
+  .feature-bubble {
+    width: 280px;
+    height: auto;
+    min-height: 153px;
+    position: absolute !important;
+    left: auto !important;
+    right: 20px;
+    z-index: 10;
+  }
+  
+  .feature-bubble-1 {
+    top: calc(56px + 79.8px + 16px + 39.9px + 46px + 100px) !important;
+  }
+  
+  .feature-bubble-2 {
+    top: calc(56px + 79.8px + 16px + 39.9px + 46px + 100px + 153px + 29px) !important;
+  }
+  
+  .feature-bubble-3 {
+    top: calc(56px + 79.8px + 16px + 39.9px + 46px + 100px + (153px + 29px) * 2) !important;
+  }
+  
+  .why-nest-title {
+    font-size: 48px;
+  }
+  
+  .why-nest-subtitle {
+    font-size: 24px;
+    width: 100%;
+    padding: 0 20px;
+  }
 }
 
